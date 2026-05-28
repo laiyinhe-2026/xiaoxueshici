@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: gushi-ci-jiaoxue
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: XFYUN_APPID
+        sync: false
+      - key: XFYUN_API_KEY
+        sync: false
+      - key: XFYUN_API_SECRET
+        sync: false
+      - key: XFYUN_ISE_ENDPOINT
+        value: wss://ise-api.xfyun.cn/v2/open-ise
+      - key: PPIO_API_KEY
+        sync: false
+      - key: PPIO_IMAGE_ENDPOINT
+        value: https://api.ppio.com/v3/async/qwen-image-edit
+      - key: PPIO_VIDEO_ENDPOINT
+        value: https://api.ppio.com/v3/async/minimax-hailuo-2.3-t2v
+      - key: PPIO_TASK_ENDPOINT
+        value: https://api.ppio.com/v3/async/task-result
+      - key: PPIO_CHAT_ENDPOINT
+        value: https://api.ppio.com/openai/v1/chat/completions
+      - key: PPIO_CHAT_MODEL
+        value: deepseek/deepseek-v4-flash
