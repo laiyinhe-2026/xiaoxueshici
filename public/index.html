@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>古诗词教学 AI 智能体</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="课堂工具">
+        <div class="brand">
+          <span class="brand-mark">诗</span>
+          <div>
+            <h1>古诗词教学 AI 智能体</h1>
+            <p>小学第一学段课堂工作台</p>
+          </div>
+        </div>
+        <nav class="nav-tabs" aria-label="功能切换">
+          <button class="nav-tab active" data-view="reading">朗读指导</button>
+          <button class="nav-tab" data-view="creation">描绘生成</button>
+          <button class="nav-tab" data-view="chat">实时问答</button>
+        </nav>
+        <section class="poem-picker">
+          <label for="poemTitle">诗词题目</label>
+          <input id="poemTitle" type="text" />
+          <label for="poemText">诗词全文</label>
+          <textarea id="poemText" rows="8"></textarea>
+        </section>
+        <section class="history-panel">
+          <div class="history-title">
+            <h2>历史记录</h2>
+            <button class="text-button" id="clearPoemHistory" type="button">清空</button>
+          </div>
+          <div class="history-list" id="poemHistory"></div>
+        </section>
+        <section class="status-list" id="serviceStatus"><span>接口状态检测中</span></section>
+      </aside>
+
+      <section class="workspace">
+        <section class="view active" id="readingView">
+          <div class="view-header">
+            <div>
+              <p class="eyebrow">发音、声调、停顿、节奏</p>
+              <h2>朗读指导</h2>
+            </div>
+            <button class="secondary-button" id="loadDemoReading">填入示例</button>
+          </div>
+          <section class="panel recorder-panel">
+            <div class="panel-title">
+              <h3>录音评测</h3>
+              <span id="recordingState">未录音</span>
+            </div>
+            <div class="record-actions">
+              <button class="primary-button" id="recordButton">开始录音</button>
+              <button class="secondary-button" id="stopButton" disabled>停止</button>
+              <label class="file-button">上传音频<input id="audioFile" type="file" accept="audio/*" /></label>
+            </div>
+            <audio id="audioPreview" controls></audio>
+            <button class="primary-button wide" id="evaluateButton">提交朗读评测</button>
+            <div class="reading-message" id="readingNextStep"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-title">
+              <h3>朗读评价</h3>
+              <span>课堂反馈</span>
+            </div>
+            <div class="reading-evaluation" id="readingEvaluation">提交后显示 AI 整理的朗读评价。</div>
+          </section>
+        </section>
+
+        <section class="view" id="creationView">
+          <div class="view-header">
+            <div>
+              <p class="eyebrow">把儿童语言转成诗意画面</p>
+              <h2>课堂描绘生成</h2>
+            </div>
+            <div class="segmented">
+              <button class="active" data-media-type="image">图片</button>
+              <button data-media-type="video">视频</button>
+            </div>
+          </div>
+          <section class="panel creation-panel">
+            <label for="depictionInput">学生描绘</label>
+            <textarea id="depictionInput" rows="5" placeholder="例如：月亮像圆盘，李白坐在床前想家，窗外很安静。"></textarea>
+            <div class="generation-options">
+              <label class="file-button">参考图<input id="referenceImage" type="file" accept="image/*" /></label>
+              <label>视频时长<select id="videoDuration"><option value="6">6 秒</option><option value="10">10 秒</option></select></label>
+              <label>分辨率<select id="videoResolution"><option value="768P">768P</option><option value="1080P">1080P</option></select></label>
+              <label class="toggle-row"><input id="watermarkToggle" type="checkbox" /><span>添加 AIGC 水印</span></label>
+            </div>
+            <button class="primary-button wide" id="generateButton">生成课堂素材</button>
+          </section>
+          <section class="panel output-panel">
+            <div class="panel-title"><h3>生成结果</h3><span id="mediaStatus">等待生成</span></div>
+            <div class="media-frame" id="mediaFrame"><span>生成后的图片或视频会显示在这里。</span></div>
+            <pre class="prompt-preview" id="promptPreview"></pre>
+          </section>
+        </section>
+
+        <section class="view" id="chatView">
+          <div class="view-header">
+            <div>
+              <p class="eyebrow">围绕当前诗词即时互动</p>
+              <h2>学生实时问答</h2>
+            </div>
+            <button class="secondary-button" id="clearChat">清空</button>
+          </div>
+          <section class="chat-panel">
+            <div class="chat-stream" id="chatStream"></div>
+            <form class="chat-form" id="chatForm">
+              <input id="questionInput" autocomplete="off" placeholder="学生提问：这句诗是什么意思？" />
+              <button class="primary-button" type="submit">发送</button>
+            </form>
+          </section>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
