@@ -1,0 +1,15 @@
+{
+  "name": "gushi-ci-jiaoxue",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI智能体，赋能小学第一学段古诗词课堂朗读、生成与问答互动。",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "check": "node --check server.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
